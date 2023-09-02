@@ -1,5 +1,5 @@
 const apiKey = process.env.REACT_APP_API_KEY!;
-const baseUrl = `https://newsdata.io/api/1/sources?apikey=${apiKey}`;
+const baseUrl = `https://newsdata.io/api/1/news?apikey=${apiKey}`;
 
 export async function getNews() {
   try {
