@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getNews } from "../service/api";
-import { NewsInterface } from "../types/types";
+import { getNews } from "../../service/api";
+import { NewsInterface } from "../../types/types";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
-import { articleAtom } from "../store/stroe";
+import { articleAtom } from "../../store/stroe";
+import ArticleRow from "../../components/ArticleRow/ArticleRow";
+import "./styles.scss";
 
 const MainPage = () => {
   const [news, setNews] = useState<NewsInterface[] | []>([]);
@@ -17,6 +19,7 @@ const MainPage = () => {
 
   const fetchData = async () => {
     const data = await getNews();
+    // @ts-ignore
     setNews(data.results);
   };
 
@@ -29,15 +32,10 @@ const MainPage = () => {
     <div>
       <h1>MainPage</h1>
       {news.length ? (
-        <div>
-          <h2> some news</h2>
+        <div className="list-wrapper">
           {news.map((element) => (
-            <div
-              key={element?.article_id}
-              onClick={() => handleArticleClick(element)}
-            >
-              <h4>{element?.title}</h4>
-              <p>{element?.description}</p>
+            <div onClick={() => handleArticleClick(element)}>
+              <ArticleRow news={element} key={element?.article_id} />
             </div>
           ))}
         </div>

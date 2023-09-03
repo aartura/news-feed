@@ -1,0 +1,22 @@
+.article-wrapper {
+    padding: 16px;
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.5em;
+
+    .article-heading {
+        line-height: 1.5em;
+        margin-bottom: 1em;
+    }
+    .article-img {
+        max-width: 50%;
+        margin-bottom: 2em;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .article-img {
+        max-width: 100%;
+    }
+}
