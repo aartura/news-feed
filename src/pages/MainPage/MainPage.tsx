@@ -6,6 +6,7 @@ import { useAtom } from "jotai";
 import { articleAtom } from "../../store/stroe";
 import ArticleRow from "../../components/ArticleRow/ArticleRow";
 import "./styles.scss";
+import Header from "../../components/Header/Header";
 
 const MainPage = () => {
   const [news, setNews] = useState<NewsInterface[] | []>([]);
@@ -30,7 +31,7 @@ const MainPage = () => {
 
   return (
     <div>
-      <h1>MainPage</h1>
+      <Header />
       {news.length ? (
         <div className="list-wrapper">
           {news.map((element) => (
