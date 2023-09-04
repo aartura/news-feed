@@ -9,6 +9,7 @@ import "./styles.scss";
 import Header from "../../components/Header/Header";
 import { Button, CircularProgress, TextField } from "@mui/material";
 import NoNews from "../../components/NoNews/NoNews";
+import Loader from "../../components/Loader/Loader";
 
 const MainPage = () => {
   const [news, setNews] = useState<NewsInterface[] | []>([]);
@@ -53,9 +54,7 @@ const MainPage = () => {
       <Header />
       <div className="list-wrapper">
         {isLoading ? (
-          <div className="loader">
-            <CircularProgress />
-          </div>
+          <Loader />
         ) : news.length ? (
           <div>
             <div className="search">
