@@ -3,10 +3,16 @@ import React from "react";
 import { articleAtom } from "../../store/stroe";
 import "./styles.scss";
 import Header from "../../components/Header/Header";
+import NoNews from "../../components/NoNews/NoNews";
+import { useNavigate } from "react-router-dom";
 
 const ArticlePage = () => {
   const [article] = useAtom(articleAtom);
+  const navigate = useNavigate();
 
+  const handleTryAgain = () => {
+    navigate(`/`);
+  };
   return (
     <>
       <Header />
@@ -24,7 +30,11 @@ const ArticlePage = () => {
             <p className="article-content">{article?.content}</p>
           </div>
         ) : (
-          <h1>No content</h1>
+          <NoNews
+            text="No news"
+            handleButton={handleTryAgain}
+            buttonText="Try again"
+          ></NoNews>
         )}
       </div>
     </>

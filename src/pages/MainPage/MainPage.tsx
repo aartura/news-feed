@@ -8,6 +8,7 @@ import ArticleRow from "../../components/ArticleRow/ArticleRow";
 import "./styles.scss";
 import Header from "../../components/Header/Header";
 import { Button, CircularProgress, TextField } from "@mui/material";
+import NoNews from "../../components/NoNews/NoNews";
 
 const MainPage = () => {
   const [news, setNews] = useState<NewsInterface[] | []>([]);
@@ -83,16 +84,11 @@ const MainPage = () => {
             ))}
           </div>
         ) : (
-          <div className="no-news">
-            <h2>No news</h2>
-            <Button
-              onClick={() => handleTryAgain()}
-              variant="contained"
-              disabled={!searchValue.length}
-            >
-              Try again
-            </Button>
-          </div>
+          <NoNews
+            text="No news"
+            handleButton={handleTryAgain}
+            buttonText="Try again"
+          ></NoNews>
         )}
       </div>
     </div>
