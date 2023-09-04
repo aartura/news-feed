@@ -20,7 +20,6 @@ const MainPage = () => {
 
   const fetchData = async () => {
     const data = await getNews();
-    // @ts-ignore
     setNews(data.results);
   };
 
