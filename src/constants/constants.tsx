@@ -202,6 +202,5 @@ export const mockNews = {
       language: "english",
     },
   ],
-  // ??
   nextPage: "1693668320754443859",
 };
