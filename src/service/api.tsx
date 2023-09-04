@@ -1,3 +1,5 @@
+import { mockNews } from "../constants/constants";
+
 const apiKey = process.env.REACT_APP_API_KEY!;
 const baseUrl = `https://newsdata.io/api/1/news?apikey=${apiKey}`;
 
@@ -8,5 +10,6 @@ export async function getNews() {
     return data;
   } catch (error) {
     console.log(error);
+    return mockNews;
   }
 }
