@@ -7,20 +7,24 @@ import { articleAtom } from "../../store/stroe";
 import ArticleRow from "../../components/ArticleRow/ArticleRow";
 import "./styles.scss";
 import Header from "../../components/Header/Header";
+import { CircularProgress } from "@mui/material";
 
 const MainPage = () => {
   const [news, setNews] = useState<NewsInterface[] | []>([]);
   const [, setArticle] = useAtom(articleAtom);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   useEffect(() => {
+    setIsLoading(true);
     fetchData();
   }, []);
 
   const fetchData = async () => {
     const data = await getNews();
     setNews(data.results);
+    setIsLoading(false);
   };
 
   const handleArticleClick = (elem: NewsInterface) => {
@@ -31,7 +35,11 @@ const MainPage = () => {
   return (
     <div>
       <Header />
-      {news.length ? (
+      {isLoading ? (
+        <div className="loader">
+          <CircularProgress />
+        </div>
+      ) : news.length ? (
         <div className="list-wrapper">
           {news.map((element) => (
             <div onClick={() => handleArticleClick(element)}>
