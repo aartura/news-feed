@@ -2,6 +2,15 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Used API
+https://newsdata.io/ - Best News API To Search, Collect, And Track Worldwide News, retrieves 10 news with a query ( 200 queries a day )
+
+## State Management tool
+https://jotai.org/ - Jotai takes an atomic approach to global React state management.
+
+## Styles
+SCSS and MUI - https://mui.com/
+
 ## Available Scripts
 
 In the project directory, you can run:
