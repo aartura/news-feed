@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import React from "react";
+import React, { useEffect } from "react";
 import { articleAtom } from "../../store/stroe";
 import "./styles.scss";
 import Header from "../../components/Header/Header";
@@ -13,6 +13,10 @@ const ArticlePage = () => {
   const handleTryAgain = () => {
     navigate(`/`);
   };
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
   return (
     <>
       <Header />
