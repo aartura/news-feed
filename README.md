@@ -5,6 +5,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Used API
 https://newsdata.io/ - Best News API To Search, Collect, And Track Worldwide News, retrieves 10 news with a query ( 200 queries a day )
 
+To use API please add REACT_APP_API_KEY to your .env file.
+
 ## State Management tool
 https://jotai.org/ - Jotai takes an atomic approach to global React state management.
 
