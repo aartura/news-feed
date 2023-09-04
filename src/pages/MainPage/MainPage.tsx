@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getNews } from "../../service/api";
+import { getNews, getNewsByName } from "../../service/api";
 import { NewsInterface } from "../../types/types";
 import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
@@ -7,12 +7,13 @@ import { articleAtom } from "../../store/stroe";
 import ArticleRow from "../../components/ArticleRow/ArticleRow";
 import "./styles.scss";
 import Header from "../../components/Header/Header";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress, TextField } from "@mui/material";
 
 const MainPage = () => {
   const [news, setNews] = useState<NewsInterface[] | []>([]);
   const [, setArticle] = useAtom(articleAtom);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
 
   const navigate = useNavigate();
 
@@ -27,29 +28,73 @@ const MainPage = () => {
     setIsLoading(false);
   };
 
+  const handleSearch = async () => {
+    setIsLoading(true);
+    const data = await getNewsByName(searchValue);
+    setNews(data.results);
+    setIsLoading(false);
+  };
+
   const handleArticleClick = (elem: NewsInterface) => {
     setArticle(elem);
     navigate(`${elem.article_id}`);
   };
 
+  const handleTryAgain = () => {
+    setSearchValue("");
+    setIsLoading(true);
+    fetchData();
+    setIsLoading(true);
+  };
+
   return (
     <div>
       <Header />
-      {isLoading ? (
-        <div className="loader">
-          <CircularProgress />
-        </div>
-      ) : news.length ? (
-        <div className="list-wrapper">
-          {news.map((element) => (
-            <div onClick={() => handleArticleClick(element)}>
-              <ArticleRow news={element} key={element?.article_id} />
+      <div className="list-wrapper">
+        {isLoading ? (
+          <div className="loader">
+            <CircularProgress />
+          </div>
+        ) : news.length ? (
+          <div>
+            <div className="search">
+              <TextField
+                id="search"
+                label="Search"
+                variant="outlined"
+                sx={{ width: "100%" }}
+                value={searchValue}
+                onChange={(e) => {
+                  setSearchValue(e.target.value);
+                }}
+              />
+              <Button
+                onClick={() => handleSearch()}
+                variant="contained"
+                disabled={!searchValue.length}
+              >
+                Serch
+              </Button>
             </div>
-          ))}
-        </div>
-      ) : (
-        <h2>No news</h2>
-      )}
+            {news.map((element) => (
+              <div onClick={() => handleArticleClick(element)}>
+                <ArticleRow news={element} key={element?.article_id} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="no-news">
+            <h2>No news</h2>
+            <Button
+              onClick={() => handleTryAgain()}
+              variant="contained"
+              disabled={!searchValue.length}
+            >
+              Try again
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

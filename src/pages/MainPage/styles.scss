@@ -1,11 +1,27 @@
 .list-wrapper {
     max-width: 600px;
     margin: 0 auto;
+    padding: 10px;
+}
+
+.search {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
 }
 
 .loader {
-    position: absolute;
+    position: relative;
     top: 200px;
     width: 100%;
+    text-align: center;
+}
+
+.no-news {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 200px;
+    margin: 200px auto;
     text-align: center;
 }

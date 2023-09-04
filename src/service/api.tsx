@@ -13,3 +13,14 @@ export async function getNews() {
     return mockNews;
   }
 }
+
+export async function getNewsByName(name: string) {
+  try {
+    const response = await fetch(`${baseUrl}&language=en&q=${name}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return mockNews;
+  }
+}
