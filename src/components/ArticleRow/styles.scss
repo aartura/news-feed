@@ -1,5 +1,7 @@
 $default-border-radius: 8px;
 
+$default-box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, .2);
+$mobile-device-width: 600px;
 @mixin two-rows {
     line-height: 1.5em;
     max-height: 3em;
@@ -14,7 +16,7 @@ $default-border-radius: 8px;
     border-radius: $default-border-radius;
 
 
-    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, .2);
+    box-shadow: $default-box-shadow;
     padding: 25px;
     cursor: pointer;
 
@@ -42,7 +44,7 @@ $default-border-radius: 8px;
     }
 }
 
-@media (max-width: 600px) {
+@media (max-width: $mobile-device-width) {
     .article-row {
         flex-direction: column;
         align-items: flex-start;

@@ -1,8 +1,10 @@
+$no-news-shift: 200px;
+
 .no-news {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-width: 200px;
-    margin: 200px auto;
+    max-width: $no-news-shift;
+    margin: $no-news-shift auto;
     text-align: center;
 }

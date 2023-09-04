@@ -19,7 +19,7 @@
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: $mobile-device-width) {
     .article-img {
         max-width: 100%;
     }
