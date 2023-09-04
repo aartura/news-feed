@@ -24,7 +24,7 @@ const ArticlePage = () => {
             <p className="article-content">{article?.content}</p>
           </div>
         ) : (
-          <p>No content</p>
+          <h1>No content</h1>
         )}
       </div>
     </>
