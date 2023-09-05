@@ -16,7 +16,9 @@ const MainPage = () => {
   const [, setArticle] = useAtom(articleAtom);
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState("");
-
+  const [nextPage, setNextPage] = useState(0);
+  const [prevPagesStack, setPrevPagesStack] = useState<number[]>([]);
+  const [currentPage, setCurrrentPage] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,6 +29,7 @@ const MainPage = () => {
   const fetchData = async () => {
     const data = await getNews();
     setNews(data.results);
+    setNextPage(data.nextPage);
     setIsLoading(false);
   };
 
@@ -40,6 +43,39 @@ const MainPage = () => {
   const handleArticleClick = (elem: NewsInterface) => {
     setArticle(elem);
     navigate(`${elem.article_id}`);
+  };
+
+  const handleNextPage = async () => {
+    setIsLoading(true);
+    setCurrrentPage(nextPage);
+    const pages = [...prevPagesStack];
+    if (!pages.length) {
+      pages.push(0);
+    } else {
+      pages.push(currentPage);
+    }
+    setPrevPagesStack(pages);
+    fetchDataWithPage(nextPage);
+  };
+
+  const handlePrevPage = async () => {
+    setIsLoading(true);
+    const pages = [...prevPagesStack];
+    pages.pop();
+    setPrevPagesStack(pages);
+    fetchDataWithPage(prevPagesStack[prevPagesStack.length - 1] || 0);
+  };
+
+  const fetchDataWithPage = async (page: number) => {
+    let data;
+    if (searchValue.length) {
+      data = await getNewsByName(searchValue, page);
+    } else {
+      data = await getNews(page);
+    }
+    setNews(data.results);
+    setNextPage(data.nextPage);
+    setIsLoading(false);
   };
 
   const handleTryAgain = () => {
@@ -77,10 +113,29 @@ const MainPage = () => {
               </Button>
             </div>
             {news.map((element) => (
-              <div onClick={() => handleArticleClick(element)}>
-                <ArticleRow news={element} key={element?.article_id} />
+              <div
+                onClick={() => handleArticleClick(element)}
+                key={element?.article_id}
+              >
+                <ArticleRow news={element} />
               </div>
             ))}
+            <div className="pagination-wrapper">
+              <Button
+                onClick={() => handlePrevPage()}
+                variant="contained"
+                disabled={!prevPagesStack.length}
+              >
+                Previous Page
+              </Button>
+              <Button
+                onClick={() => handleNextPage()}
+                variant="contained"
+                disabled={!nextPage}
+              >
+                Next Page
+              </Button>
+            </div>
           </div>
         ) : (
           <NoNews
