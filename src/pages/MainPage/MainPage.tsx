@@ -79,7 +79,7 @@ const MainPage = () => {
     setIsLoading(false);
   };
 
-  const handleTryAgain = () => {
+  const handleRefreshButton = () => {
     setSearchValue("");
     setIsLoading(true);
     fetchData();
@@ -100,7 +100,7 @@ const MainPage = () => {
                 setSearchValue(e.target.value);
               }}
               handleSearchButton={handleSearch}
-              handleClearButton={() => setSearchValue("")}
+              handleClearButton={handleRefreshButton}
             />
             {news.map((element) => (
               <div
@@ -130,7 +130,7 @@ const MainPage = () => {
         ) : (
           <NoNews
             text="No news"
-            handleButton={handleTryAgain}
+            handleButton={handleRefreshButton}
             buttonText="Try again"
           ></NoNews>
         )}
