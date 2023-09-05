@@ -10,6 +10,7 @@ import Header from "../../components/Header/Header";
 import { Button, TextField } from "@mui/material";
 import NoNews from "../../components/NoNews/NoNews";
 import Loader from "../../components/Loader/Loader";
+import Search from "../../components/Search/Search";
 
 const MainPage = () => {
   const [news, setNews] = useState<NewsInterface[] | []>([]);
@@ -93,25 +94,14 @@ const MainPage = () => {
           <Loader />
         ) : news.length ? (
           <div>
-            <div className="search">
-              <TextField
-                id="search"
-                label="Search"
-                variant="outlined"
-                sx={{ width: "100%" }}
-                value={searchValue}
-                onChange={(e) => {
-                  setSearchValue(e.target.value);
-                }}
-              />
-              <Button
-                onClick={() => handleSearch()}
-                variant="contained"
-                disabled={!searchValue.length}
-              >
-                Serch
-              </Button>
-            </div>
+            <Search
+              searchValue={searchValue}
+              handleSearchInput={(e) => {
+                setSearchValue(e.target.value);
+              }}
+              handleSearchButton={handleSearch}
+              handleClearButton={() => setSearchValue("")}
+            />
             {news.map((element) => (
               <div
                 onClick={() => handleArticleClick(element)}
