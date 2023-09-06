@@ -14,7 +14,7 @@ const Search = ({
   handleClearButton: () => void;
 }) => {
   return (
-    <div className="search">
+    <div className="search" data-testid="search">
       <TextField
         id="search"
         label="Search"
@@ -40,6 +40,7 @@ const Search = ({
         onClick={handleSearchButton}
         variant="contained"
         disabled={!searchValue.length}
+        data-testid="search-button"
       >
         Serch
       </Button>

@@ -7,7 +7,7 @@ import { articleAtom } from "../../store/stroe";
 import ArticleRow from "../../components/ArticleRow/ArticleRow";
 import "./styles.scss";
 import Header from "../../components/Header/Header";
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import NoNews from "../../components/NoNews/NoNews";
 import Loader from "../../components/Loader/Loader";
 import Search from "../../components/Search/Search";

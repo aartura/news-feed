@@ -3,7 +3,7 @@ import "./styles.scss";
 
 const Loader = () => {
   return (
-    <div className="loader">
+    <div className="loader" data-testid="loader">
       <CircularProgress />
     </div>
   );

@@ -11,7 +11,7 @@ const NoNews = ({
   buttonText: string;
 }) => {
   return (
-    <div className="no-news">
+    <div className="no-news" data-testid="no-news">
       <h2>{text}</h2>
       <Button onClick={() => handleButton()} variant="contained">
         {buttonText}
